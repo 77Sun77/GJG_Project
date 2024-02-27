@@ -20,17 +20,20 @@ public class Enemy : MonoBehaviour
     private int damage;
     [SerializeField]
     private int attackSpeed;
+    [SerializeField] private float rotateOffset;
 
     [SerializeField]
     private GameObject bullet;
 
-    public Animator animator;
+    private Animator animator;
     private GameObject player;
     private FloatingHealthBar healthBar;
     private Rigidbody2D rigid;
 
     private float lastAttackTime = 0;
     private float currentHealth;
+    private bool seeingLeft = true;
+    private Quaternion flip;
 
     public bool Knockback;
     public float KnockbackTimer;
@@ -40,7 +43,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         healthBar = GetComponentInChildren<FloatingHealthBar>();
         rigid = GetComponent<Rigidbody2D>();
         currentHealth = health;
@@ -51,6 +54,8 @@ public class Enemy : MonoBehaviour
     {
         Rotate();
         if(!Knockback) MoveOrAttack();
+        
+        if(!Knockback) MoveOrAttack();
         else
         {
             KnockbackTimer += Time.deltaTime;
@@ -59,36 +64,66 @@ public class Enemy : MonoBehaviour
                 Knockback = false;
                 KnockbackTimer = 0;
             }
+
+            rb.velocity = Vector2.zero;
+            animator.SetBool("Moving", false);
         }
     }
 
     void Rotate()
     {
-        if (player)
-        {
-            Vector3 vectorToTarget = player.transform.position - transform.position;
-            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
-            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 20);
-        }
+        Vector3 vectorToTarget = player.transform.position - transform.position;
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - rotateOffset;
+        //Debug.Log(angle);
+
+        float realAngle = 0;
         
+        if (angle > -90 && angle < 90)
+        {
+            realAngle = Mathf.Clamp(angle, -3, 3);
+
+            if (seeingLeft)
+            {
+                seeingLeft = false;
+                flip = Quaternion.Euler(0, 180, 0);
+            }
+        }
+        else if (angle < -90 || angle > 90)
+        {
+            if (angle < -90)
+            {
+                realAngle = Mathf.Clamp(angle, -180, -177);
+            } else if (angle > 90)
+            {
+                realAngle = Mathf.Clamp(angle, 177, 180);
+            }
+
+            if (!seeingLeft)
+            {
+                seeingLeft = true;
+                flip = Quaternion.Euler(0, 0, 0);
+            }
+
+        }
+
+        //Debug.Log(realAngle);
+
+        transform.rotation = flip;
+        //transform.rotation =  Quaternion.AngleAxis(seeingLeft ? realAngle : -realAngle, Vector3.forward) * flip;
+
+        //Debug.Log(transform.rotation);
     }
 
     void MoveOrAttack()
     {
         if (player)
         {
-            float playerDistance = GetPlayerDistance();
-            if (playerDistance > range)
-            {
-                Move();
-            }
-            else
-            {
-                Attack();
-            }
+            Move();
         }
-        
+        else
+        {
+            Attack();
+        }
     }
 
     float GetPlayerDistance()
