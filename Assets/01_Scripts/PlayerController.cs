@@ -60,10 +60,9 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator RangeAttackDelay()
     {
-        Movement movement = GetComponent<Movement>();
         isMove = false;
         rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         isMove = true;
     }
 }

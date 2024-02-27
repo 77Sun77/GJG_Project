@@ -8,6 +8,8 @@ public class SpawnManager : MonoBehaviour
 
     public List<GameObject> EnemyList = new List<GameObject>();
     public float SpawnCooltime;
+
+    public int SpawnCount;
     
     void Start()
     {
@@ -44,11 +46,13 @@ public class SpawnManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(SpawnCooltime);
+            while (SpawnCount > 50) yield return null;
             float Spawn_X = Random.Range(-15f, 15f);
             float Spawn_Y = Random.Range(-15f, 15f);
             Vector2 vec = new Vector2(Spawn_X, Spawn_Y);
             Transform tr = Instantiate(EnemyList[Random.Range(0, EnemyList.Count)], vec, Quaternion.identity).transform;
-            while(IsTargetVisible(Camera.main, tr))
+            SpawnCount++;
+            while (IsTargetVisible(Camera.main, tr))
             {
                 Spawn_X = Random.Range(-15f, 15f);
                 Spawn_Y = Random.Range(-15f, 15f);
@@ -56,6 +60,7 @@ public class SpawnManager : MonoBehaviour
                 tr.position = vec;
                 yield return null;
             }
+            tr.gameObject.SetActive(true);
         }
         
     }

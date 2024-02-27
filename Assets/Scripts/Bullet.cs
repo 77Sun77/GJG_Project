@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Destroy(gameObject,10);
     }
 
     // Update is called once per frame

@@ -119,7 +119,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6076626382640695025
 Transform:
   m_ObjectHideFlags: 0
@@ -239,10 +239,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: person
   health: 5
-  speed: 0.5
+  speed: 1
   range: 1
-  damage: 10
+  damage: 1
   attackSpeed: 3
   bullet: {fileID: 0}
   animator: {fileID: 0}
   Knockback: 0
+  KnockbackTimer: 0
+  isDeath: 0

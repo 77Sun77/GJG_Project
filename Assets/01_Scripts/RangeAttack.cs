@@ -33,15 +33,19 @@ public class RangeAttack : MonoBehaviour
             
             if (HitEnemy.Contains(coll) || !enable) return;
             else HitEnemy.Add(coll);
-
             
             Enemy enemy_Script = coll.GetComponent<Enemy>();
             enemy_Script.Damage(Damage);
-            Vector2 dir = coll.transform.position - transform.position;
-            Rigidbody2D enemy = coll.GetComponent<Rigidbody2D>();
-            enemy.velocity = Vector2.zero;
-            enemy.AddForce(dir.normalized * 500);
-            StartCoroutine(Knockback(enemy, dir));
+
+            if (!enemy_Script.isDeath)
+            {
+                Vector2 dir = coll.transform.position - transform.position;
+                Rigidbody2D enemy = coll.GetComponent<Rigidbody2D>();
+                enemy.velocity = Vector2.zero;
+                enemy.AddForce(dir.normalized * 500);
+                StartCoroutine(Knockback(enemy, dir));
+            }
+            
 
         }
     }
@@ -50,18 +54,12 @@ public class RangeAttack : MonoBehaviour
     {
         enemy.GetComponent<Enemy>().Knockback = true;
         yield return new WaitForSeconds(0.15f);
-        if (enemy)
-        {
-            enemy.velocity = Vector2.zero;
-            enemy.AddForce(dir.normalized * 10);
-        }
-        
-        yield return new WaitForSeconds(0.5f);
-        if (enemy)
-        {
-            enemy.velocity = Vector2.zero;
-            enemy.GetComponent<Enemy>().Knockback = false;
-        }
-        
+        enemy.velocity = Vector2.zero;
+        enemy.AddForce(dir.normalized * 10);
+
+        yield return new WaitForSeconds(1f);
+        enemy.velocity = Vector2.zero;
+        enemy.GetComponent<Enemy>().Knockback = false;
+
     }
 }

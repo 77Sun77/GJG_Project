@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
             health = 0;
             Destroy(gameObject);
-
+            GameManager.instance.GameOver.SetActive(true);
             return;
         }
 

@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
     public float timer;
     public int timeSpeed;
     public int EventCount;
-
+    public float DeathCount;
 
 
     [Space(20)]
     [Header("UI")]
+    public GameObject GameOver;
     public TextMeshProUGUI timerText;
+    public GameObject[] Skill_Icon;
     public Image[] SkillBlind;
 
     [Space(20)]
@@ -45,11 +47,13 @@ public class GameManager : MonoBehaviour
         {
             EventCount++;
             spm.AddList(EventCount);
+            Skill_Icon[EventCount].SetActive(true);
         }
         else if ((int)timer / 60 == 6 && EventCount == 1)
         {
             EventCount++;
             spm.AddList(EventCount);
+            Skill_Icon[EventCount].SetActive(true);
         }
         else if ((int)timer / 60 == 9 && EventCount == 2)
         {
