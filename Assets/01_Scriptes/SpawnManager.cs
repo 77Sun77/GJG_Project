@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         Invoke("EnemySpawn", SpawnCooltime);
+        AddList(0);
     }
 
     void Update()
