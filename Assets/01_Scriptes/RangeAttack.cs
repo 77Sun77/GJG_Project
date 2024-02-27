@@ -35,16 +35,18 @@ public class RangeAttack : MonoBehaviour
             Rigidbody2D enemy = coll.GetComponent<Rigidbody2D>();
             enemy.velocity = Vector2.zero;
             enemy.AddForce(dir.normalized * 500);
-            StartCoroutine(Delay(enemy, dir));
+            StartCoroutine(Knockback(enemy, dir));
         }
     }
 
-    IEnumerator Delay(Rigidbody2D enemy, Vector2 dir)
+    IEnumerator Knockback(Rigidbody2D enemy, Vector2 dir)
     {
+        enemy.GetComponent<Enemy>().Knockback = true;
         yield return new WaitForSeconds(0.15f);
         enemy.velocity = Vector2.zero;
         enemy.AddForce(dir.normalized * 10);
         yield return new WaitForSeconds(0.5f);
         enemy.velocity = Vector2.zero;
+        enemy.GetComponent<Enemy>().Knockback = false;
     }
 }

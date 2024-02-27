@@ -29,6 +29,9 @@ public class Enemy : MonoBehaviour
 
     private float lastAttackTime = 0;
 
+
+    public bool Knockback;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +43,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Rotate();
-        MoveOrAttack();
+        if(!Knockback) MoveOrAttack();
     }
 
     void Rotate()
