@@ -758,10 +758,13 @@ MonoBehaviour:
   speed: 1
   range: 5
   damage: 2
-  attackSpeed: 5
+  attackSpeed: 3
   rotateOffset: 0
   bullet: {fileID: 1941385011590777624, guid: 247815fe535a2264e91eacab83c918fd, type: 3}
+  bulletOffset: 0.5
   Knockback: 0
+  KnockbackTimer: 0
+  isDeath: 0
 --- !u!4 &1864516012
 Transform:
   m_ObjectHideFlags: 0
@@ -871,7 +874,10 @@ MonoBehaviour:
   attackSpeed: 1
   rotateOffset: 90
   bullet: {fileID: 6586456435369697616, guid: 177fc5176c0972c459100229ed75b989, type: 3}
+  bulletOffset: 0
   Knockback: 0
+  KnockbackTimer: 0
+  isDeath: 0
 --- !u!95 &1889626924
 Animator:
   serializedVersion: 5
