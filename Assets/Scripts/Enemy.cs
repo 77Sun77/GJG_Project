@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
                 KnockbackTimer = 0;
             }
 
-            rb.velocity = Vector2.zero;
+            rigid.velocity = Vector2.zero;
             animator.SetBool("Moving", false);
         }
     }
