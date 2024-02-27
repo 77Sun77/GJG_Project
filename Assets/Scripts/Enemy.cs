@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     private string type;
 
     [SerializeField]
-    private int health;
+    private float health;
 
     [SerializeField]
     private float speed;
@@ -26,9 +26,10 @@ public class Enemy : MonoBehaviour
 
     public Animator animator;
     private GameObject player;
+    private FloatingHealthBar healthBar;
 
     private float lastAttackTime = 0;
-
+    private float currentHealth;
 
     public bool Knockback;
 
@@ -37,6 +38,8 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
+        currentHealth = health;
     }
 
     // Update is called once per frame
@@ -95,5 +98,17 @@ public class Enemy : MonoBehaviour
         {
             Instantiate(bullet, transform.position, transform.rotation);
         }
+    }
+
+    public void Damage(int damage)
+    {
+        if (currentHealth - damage <= 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        currentHealth -= damage;
+        healthBar.UpdateValue(currentHealth, health);
     }
 }
