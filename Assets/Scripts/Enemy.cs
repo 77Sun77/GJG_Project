@@ -48,10 +48,10 @@ public class Enemy : MonoBehaviour
 
     void Rotate()
     {
-        Vector3 direction = player.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Vector3 vectorToTarget = player.transform.position - transform.position;
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 20);
     }
 
     void MoveOrAttack()

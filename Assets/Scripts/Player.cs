@@ -23,9 +23,11 @@ public class Player : MonoBehaviour
     {
         if (health - damage <= 0) 
         {
-            health = 0;
             Debug.Log("Dead");
-            // °ÔÀÓ ³¡
+
+            health = 0;
+            Destroy(gameObject);
+
             return;
         }
 
