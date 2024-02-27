@@ -18,10 +18,13 @@ public class GameManager : MonoBehaviour
     [Space(20)]
     [Header("UI")]
     public TextMeshProUGUI timerText;
+    public Image[] SkillBlind;
 
     [Space(20)]
     [Header("Component")]
     public SpawnManager spm;
+    public PlayerController PC;
+    
 
     void Start()
     {
@@ -55,5 +58,8 @@ public class GameManager : MonoBehaviour
             print("Boss On");
             EventCount++;
         }
+
+        SkillBlind[1].fillAmount = PC.FireballCooltime / PC.FireballCooltime_MAX;
+        SkillBlind[2].fillAmount = PC.RangeAttackCooltime / PC.RangeAttackCooltime_MAX;
     }
 }

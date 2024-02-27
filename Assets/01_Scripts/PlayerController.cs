@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skil_Test_Code : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public GameObject FireBall;
     public GameObject RangeAttack;
@@ -14,36 +14,39 @@ public class Skil_Test_Code : MonoBehaviour
     public float RangeAttackCooltime;
     void Start()
     {
-        
+
     }
-    
+
     void Update()
     {
-        FireballCooltime += Time.deltaTime;
-        RangeAttackCooltime += Time.deltaTime;
+        FireballCooltime -= Time.deltaTime;
+        RangeAttackCooltime -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Alpha2) /*&& GameManager.instance.EventCount >= 1*/)
         {
-            if (FireballCooltime >= FireballCooltime_MAX)
+            if (FireballCooltime < 0)
             {
                 Instantiate(FireBall, transform.position, Quaternion.identity);
-                FireballCooltime = 0;
+                FireballCooltime = FireballCooltime_MAX;
             }
-            
+
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) /*&& GameManager.instance.EventCount >= 2*/)
         {
-            if (RangeAttackCooltime >= RangeAttackCooltime_MAX)
+            if (RangeAttackCooltime < 0)
             {
                 Instantiate(RangeAttack, transform);
-                RangeAttackCooltime = 0;
+                StartCoroutine(RangeAttackDelay());
+                RangeAttackCooltime = RangeAttackCooltime_MAX;
             }
         }
     }
 
-    IEnumerator Delay()
+    IEnumerator RangeAttackDelay()
     {
-        GetComponent<Movement>().enabled = false;
+        Movement movement = GetComponent<Movement>();
+        movement.enabled = false;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         yield return new WaitForSeconds(1);
-        GetComponent<Movement>().enabled = true;
+        movement.enabled = true;
     }
 }

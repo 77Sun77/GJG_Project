@@ -26,8 +26,11 @@ public class Fireball : MonoBehaviour
     {
         if (coll.CompareTag("Enemy"))
         {
-            // 대미지를 입히는 구간
-            Destroy(coll.gameObject); // 테스트용 코드
+            /*
+            Enemy enemy_Script = enemy.GetComponent<Enemy>();
+            enemy_Script.health -= Damage;
+            if (enemy_Script.health <= 0) // 적 사망 */
+    
             Destroy(gameObject);
         }
     }

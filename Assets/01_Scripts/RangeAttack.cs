@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class RangeAttack : MonoBehaviour
 {
+    [SerializeField]
+    float Damage;
+
     List<Collider2D> HitEnemy = new List<Collider2D>();
     float ActiveTime;
     bool enable;
     void Start()
     {
-        Destroy(gameObject, 3);
+        Destroy(gameObject, 1);
         enable = true;
     }
 
@@ -27,9 +30,14 @@ public class RangeAttack : MonoBehaviour
     {
         if (coll.CompareTag("Enemy"))
         {
-            // 대미지를 입히는 코드
+            
             if (HitEnemy.Contains(coll) || !enable) return;
             else HitEnemy.Add(coll);
+
+            /*
+            Enemy enemy_Script = enemy.GetComponent<Enemy>();
+            enemy_Script.health -= Damage;
+            if (enemy_Script.health <= 0) // 적 사망 */
 
             Vector2 dir = coll.transform.position - transform.position;
             Rigidbody2D enemy = coll.GetComponent<Rigidbody2D>();
