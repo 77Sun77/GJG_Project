@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         else str = ((int)timer / 60) + "min, " + (((int)timer- ((int)timer / 60) * 60)).ToString() + "sec";
         timerText.text = str;
 
+        
         if((int)timer/60 == 3&& EventCount == 0)
         {
             print("Event On");
@@ -51,9 +52,8 @@ public class GameManager : MonoBehaviour
         }
         else if ((int)timer / 60 == 9 && EventCount == 2)
         {
-            print("Event On");
+            print("Boss On");
             EventCount++;
-            spm.AddList(EventCount);
         }
     }
 }
