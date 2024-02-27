@@ -143,8 +143,8 @@ MonoBehaviour:
   range: 5
   damage: 10
   attackSpeed: 7
-  bullet: {fileID: 6586456435369697616, guid: 177fc5176c0972c459100229ed75b989, type: 3}
-  animator: {fileID: 0}
+  rotateOffset: 0
+  bullet: {fileID: 1941385011590777624, guid: 247815fe535a2264e91eacab83c918fd, type: 3}
   Knockback: 0
   KnockbackTimer: 0
   isDeath: 0
