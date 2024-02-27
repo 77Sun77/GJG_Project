@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Data")]
+    public float movespeed;
+    float speedX, speedY;
+    Rigidbody2D rb;
+
+    [Space(20)]
+    [Header("Skill")]
     public GameObject FireBall;
     public GameObject RangeAttack;
 
@@ -12,16 +19,19 @@ public class PlayerController : MonoBehaviour
 
     public float RangeAttackCooltime_MAX;
     public float RangeAttackCooltime;
-    void Start()
-    {
+    bool isMove;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        isMove = true;
     }
 
     void Update()
     {
         FireballCooltime -= Time.deltaTime;
         RangeAttackCooltime -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Alpha2) /*&& GameManager.instance.EventCount >= 1*/)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && GameManager.instance.EventCount >= 1)
         {
             if (FireballCooltime < 0)
             {
@@ -30,7 +40,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) /*&& GameManager.instance.EventCount >= 2*/)
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && GameManager.instance.EventCount >= 2)
         {
             if (RangeAttackCooltime < 0)
             {
@@ -39,14 +49,22 @@ public class PlayerController : MonoBehaviour
                 RangeAttackCooltime = RangeAttackCooltime_MAX;
             }
         }
-    }
 
+        if(isMove) Move();
+    }
+    private void Move()
+    {
+        speedX = Input.GetAxisRaw("Horizontal") * movespeed;
+        speedY = Input.GetAxisRaw("Vertical") * movespeed;
+        rb.velocity = new Vector2(speedX, speedY);
+    }
     IEnumerator RangeAttackDelay()
     {
         Movement movement = GetComponent<Movement>();
-        movement.enabled = false;
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        isMove = false;
+        rb.velocity = Vector2.zero;
         yield return new WaitForSeconds(1);
-        movement.enabled = true;
+        isMove = true;
     }
 }
+//GetComponent<Rigidbody2D>().velocity = (direction.normalized * speed);
