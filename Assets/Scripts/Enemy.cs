@@ -6,6 +6,9 @@ using UnityEngine.UIElements;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
+    private string type;
+
+    [SerializeField]
     private int health;
 
     [SerializeField]
@@ -15,13 +18,22 @@ public class Enemy : MonoBehaviour
     private int range;
     [SerializeField]
     private int damage;
+    [SerializeField]
+    private int attackSpeed;
 
+    [SerializeField]
+    private GameObject bullet;
+
+    public Animator animator;
     private GameObject player;
+
+    private float lastAttackTime = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -63,8 +75,22 @@ public class Enemy : MonoBehaviour
         transform.position += (direction * speed * Time.deltaTime);
     }
 
-    public virtual void Attack()
+    public void Attack()
     {
-        
+        if (Time.time - attackSpeed < lastAttackTime)
+        {
+            return;
+        }
+
+        lastAttackTime = Time.time;
+        animator.SetTrigger("Attack");
+        if (type == "person" || type == "knight")
+        {
+            player.GetComponent<Player>().Damage(damage);
+        }
+        else if (type == "archer")
+        {
+            Instantiate(bullet, transform.position, transform.rotation);
+        }
     }
 }

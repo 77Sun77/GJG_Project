@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private int health;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,19 @@ public class Player : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Damage(int damage)
+    {
+        if (health - damage <= 0) 
+        {
+            health = 0;
+            Debug.Log("Dead");
+            // 게임 끝
+            return;
+        }
+
+        health -= damage;
+        // 이펙트?
     }
 }
