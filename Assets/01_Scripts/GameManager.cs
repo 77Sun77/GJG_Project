@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime* timeSpeed;
+        timer += Time.deltaTime * timeSpeed;
         
         string str = "";
         if ((int)timer / 60 == 0) str = ((int)timer).ToString() + "sec";
@@ -41,15 +41,13 @@ public class GameManager : MonoBehaviour
         timerText.text = str;
 
         
-        if((int)timer/60 == 3&& EventCount == 0)
+        if((int)timer/60 == 3 && EventCount == 0)
         {
-            print("Event On");
             EventCount++;
             spm.AddList(EventCount);
         }
         else if ((int)timer / 60 == 6 && EventCount == 1)
         {
-            print("Event On");
             EventCount++;
             spm.AddList(EventCount);
         }

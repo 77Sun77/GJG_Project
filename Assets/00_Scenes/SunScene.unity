@@ -246,7 +246,6 @@ GameObject:
   - component: {fileID: 138733785}
   - component: {fileID: 138733788}
   - component: {fileID: 138733787}
-  - component: {fileID: 138733784}
   - component: {fileID: 138733789}
   m_Layer: 0
   m_Name: Player
@@ -255,19 +254,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &138733784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 138733783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a1d1d67063cb8b47982cca6ff3dd9b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movespeed: 5
 --- !u!212 &138733785
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -384,6 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0590ad9f661238a4b9a4109f79810b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movespeed: 5
   FireBall: {fileID: 3068337395469441697, guid: 1089d2fe32fc6eb49b325bf13d5c40bc, type: 3}
   RangeAttack: {fileID: 3274434256274762605, guid: d54ad100ee9ec104f8a1ae3cff793a70, type: 3}
   FireballCooltime_MAX: 0.5
@@ -500,7 +487,7 @@ MonoBehaviour:
   - {fileID: 3759050341658302184, guid: 9b21d1e783d1b8c4ba77b2a1b61bea8e, type: 3}
   - {fileID: 8152846133604990738, guid: 5ce4c62beba1795448b8d31a4b06ebda, type: 3}
   EnemyList: []
-  SpawnCooltime: 5
+  SpawnCooltime: 3
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,7 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  timeSpeed: 10
+  timeSpeed: 50
   EventCount: 0
   timerText: {fileID: 743080398}
   SkillBlind:
@@ -1318,7 +1305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1199890886
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1335,9 +1322,9 @@ RectTransform:
   m_Father: {fileID: 1060835481}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 320, y: -100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1199890887
@@ -1891,7 +1878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2128604419
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1908,9 +1895,9 @@ RectTransform:
   m_Father: {fileID: 1060835481}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 210, y: -100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128604420
