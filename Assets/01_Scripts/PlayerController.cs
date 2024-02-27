@@ -67,4 +67,3 @@ public class PlayerController : MonoBehaviour
         isMove = true;
     }
 }
-//GetComponent<Rigidbody2D>().velocity = (direction.normalized * speed);

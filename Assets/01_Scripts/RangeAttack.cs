@@ -5,7 +5,7 @@ using UnityEngine;
 public class RangeAttack : MonoBehaviour
 {
     [SerializeField]
-    float Damage;
+    int Damage;
 
     List<Collider2D> HitEnemy = new List<Collider2D>();
     float ActiveTime;
@@ -34,16 +34,15 @@ public class RangeAttack : MonoBehaviour
             if (HitEnemy.Contains(coll) || !enable) return;
             else HitEnemy.Add(coll);
 
-            /*
-            Enemy enemy_Script = enemy.GetComponent<Enemy>();
-            enemy_Script.health -= Damage;
-            if (enemy_Script.health <= 0) // Àû »ç¸Á */
-
+            
+            Enemy enemy_Script = coll.GetComponent<Enemy>();
+            enemy_Script.Damage(Damage);
             Vector2 dir = coll.transform.position - transform.position;
             Rigidbody2D enemy = coll.GetComponent<Rigidbody2D>();
             enemy.velocity = Vector2.zero;
             enemy.AddForce(dir.normalized * 500);
             StartCoroutine(Knockback(enemy, dir));
+
         }
     }
 
@@ -51,10 +50,18 @@ public class RangeAttack : MonoBehaviour
     {
         enemy.GetComponent<Enemy>().Knockback = true;
         yield return new WaitForSeconds(0.15f);
-        enemy.velocity = Vector2.zero;
-        enemy.AddForce(dir.normalized * 10);
+        if (enemy)
+        {
+            enemy.velocity = Vector2.zero;
+            enemy.AddForce(dir.normalized * 10);
+        }
+        
         yield return new WaitForSeconds(0.5f);
-        enemy.velocity = Vector2.zero;
-        enemy.GetComponent<Enemy>().Knockback = false;
+        if (enemy)
+        {
+            enemy.velocity = Vector2.zero;
+            enemy.GetComponent<Enemy>().Knockback = false;
+        }
+        
     }
 }

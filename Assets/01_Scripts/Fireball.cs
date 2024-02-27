@@ -6,6 +6,8 @@ public class Fireball : MonoBehaviour
 {
     public float FireballSpeed;
     Rigidbody2D rigid;
+    [SerializeField]
+    int Damage;
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -26,11 +28,11 @@ public class Fireball : MonoBehaviour
     {
         if (coll.CompareTag("Enemy"))
         {
-            /*
-            Enemy enemy_Script = enemy.GetComponent<Enemy>();
-            enemy_Script.health -= Damage;
-            if (enemy_Script.health <= 0) // Àû »ç¸Á */
-    
+            
+            Enemy enemy_Script = coll.GetComponent<Enemy>();
+            enemy_Script.Damage(Damage);
+
+
             Destroy(gameObject);
         }
     }

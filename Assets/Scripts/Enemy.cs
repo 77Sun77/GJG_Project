@@ -78,7 +78,8 @@ public class Enemy : MonoBehaviour
     void Move()
     {
         Vector3 direction = player.transform.position - transform.position;
-        transform.position += (direction * speed * Time.deltaTime);
+
+        GetComponent<Rigidbody2D>().velocity = (direction.normalized * speed);
     }
 
     public void Attack()
@@ -100,15 +101,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Damage(int damage)
+    public bool Damage(int damage)
     {
         if (currentHealth - damage <= 0)
         {
             Destroy(gameObject);
-            return;
+            return true;
         }
 
         currentHealth -= damage;
         healthBar.UpdateValue(currentHealth, health);
+        return false;
     }
 }
