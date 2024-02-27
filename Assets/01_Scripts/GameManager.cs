@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [Space(20)]
     [Header("UI")]
     public GameObject GameOver;
+    public GameObject menu;
     public TextMeshProUGUI timerText;
     public GameObject[] Skill_Icon;
     public Image[] SkillBlind;
@@ -35,6 +36,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape)) Pause();
+
         timer += Time.deltaTime * timeSpeed;
         
         string str = "";
@@ -47,21 +50,31 @@ public class GameManager : MonoBehaviour
         {
             EventCount++;
             spm.AddList(EventCount);
+            spm.SpawnCooltime = 3;
             Skill_Icon[EventCount].SetActive(true);
         }
         else if ((int)timer / 60 == 6 && EventCount == 1)
         {
             EventCount++;
             spm.AddList(EventCount);
+            spm.SpawnCooltime = 1;
             Skill_Icon[EventCount].SetActive(true);
         }
         else if ((int)timer / 60 == 9 && EventCount == 2)
         {
-            print("Boss On");
+            spm.SpawnBoss();
             EventCount++;
         }
 
         SkillBlind[1].fillAmount = PC.FireballCooltime / PC.FireballCooltime_MAX;
         SkillBlind[2].fillAmount = PC.RangeAttackCooltime / PC.RangeAttackCooltime_MAX;
+    }
+
+    public void Pause()
+    {
+        menu.SetActive(!menu.activeInHierarchy);
+        if (menu.activeInHierarchy) Time.timeScale = 0;
+        else Time.timeScale = 1;
+
     }
 }

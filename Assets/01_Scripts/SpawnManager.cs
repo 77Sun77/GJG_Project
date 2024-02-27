@@ -5,16 +5,23 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] Enemies;
+    public GameObject Boss;
 
     public List<GameObject> EnemyList = new List<GameObject>();
     public float SpawnCooltime;
 
     public int SpawnCount;
+
+    public IEnumerator coroutian;
+
     
+
     void Start()
     {
-        StartCoroutine(EnemySpawn());
         AddList(0);
+        coroutian = EnemySpawn();
+        StartCoroutine(coroutian);
+        
 
     }
 
@@ -43,6 +50,21 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator EnemySpawn()
     {
+        for(int i=0; i < 5; i++)
+        {
+            float Spawn_X = Random.Range(-15f, 15f);
+            float Spawn_Y = Random.Range(-15f, 15f);
+            Vector2 vec = new Vector2(Spawn_X, Spawn_Y);
+            Transform tr = Instantiate(EnemyList[Random.Range(0, EnemyList.Count)], vec, Quaternion.identity).transform;
+            SpawnCount++;
+            spawn(tr);
+            while (IsTargetVisible(Camera.main, tr))
+            {
+                spawn(tr);
+                yield return null;
+            }
+            tr.gameObject.SetActive(true);
+        }
         while (true)
         {
             yield return new WaitForSeconds(SpawnCooltime);
@@ -52,16 +74,42 @@ public class SpawnManager : MonoBehaviour
             Vector2 vec = new Vector2(Spawn_X, Spawn_Y);
             Transform tr = Instantiate(EnemyList[Random.Range(0, EnemyList.Count)], vec, Quaternion.identity).transform;
             SpawnCount++;
+            spawn(tr);
             while (IsTargetVisible(Camera.main, tr))
             {
-                Spawn_X = Random.Range(-15f, 15f);
-                Spawn_Y = Random.Range(-15f, 15f);
-                vec = new Vector2(Spawn_X, Spawn_Y);
-                tr.position = vec;
+                spawn(tr);
                 yield return null;
             }
             tr.gameObject.SetActive(true);
         }
         
+    }
+
+    public void SpawnBoss()
+    {
+        StopCoroutine(coroutian);
+        StartCoroutine(SpawnBoss_Co());
+        
+    }
+
+    IEnumerator SpawnBoss_Co()
+    {
+        Transform tr = Instantiate(Boss).transform;
+        spawn(tr);
+        while (IsTargetVisible(Camera.main, tr))
+        {
+            spawn(tr);
+            yield return null;
+        }
+        tr.gameObject.SetActive(true);
+    }
+
+    void spawn(Transform tr)
+    {
+        
+        float Spawn_X = Random.Range(-15f, 15f);
+        float Spawn_Y = Random.Range(-15f, 15f);
+        Vector2 vec = new Vector2(Spawn_X, Spawn_Y);
+        tr.position = vec;
     }
 }

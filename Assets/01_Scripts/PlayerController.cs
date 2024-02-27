@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         FireballCooltime -= Time.deltaTime;
         RangeAttackCooltime -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Alpha2) && GameManager.instance.EventCount >= 1)
+        if (Input.GetKeyDown(KeyCode.Q) && GameManager.instance.EventCount >= 1)
         {
             if (FireballCooltime < 0)
             {
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && GameManager.instance.EventCount >= 2)
+        else if (Input.GetKeyDown(KeyCode.E) && GameManager.instance.EventCount >= 2)
         {
             if (RangeAttackCooltime < 0)
             {
@@ -54,9 +54,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Move()
     {
-        speedX = Input.GetAxisRaw("Horizontal") * movespeed;
-        speedY = Input.GetAxisRaw("Vertical") * movespeed;
-        rb.velocity = new Vector2(speedX, speedY);
+        speedX = Input.GetAxisRaw("Horizontal") ;
+        speedY = Input.GetAxisRaw("Vertical") ;
+        Vector2 dir = new Vector2(speedX, speedY);
+        dir = dir.normalized * movespeed;
+        rb.velocity = dir;
     }
     IEnumerator RangeAttackDelay()
     {

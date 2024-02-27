@@ -122,6 +122,13 @@ public class Enemy : MonoBehaviour
         {
             Instantiate(bullet, transform.position, transform.rotation);
         }
+        else if(type == "boss")
+        {
+            float playerDistance = GetPlayerDistance();
+            if (playerDistance < 3) player.GetComponent<Player>().Damage(damage);
+            else if (playerDistance < 10) Instantiate(bullet, transform.position, transform.rotation);
+            else print("µ¹Áø");
+        }
     }
 
     public void Damage(int damage)
