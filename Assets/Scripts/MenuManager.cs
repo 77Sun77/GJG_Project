@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject inGameMenu;
+    public GameObject gameOverMenu;
 
     public static MenuManager instance;
 
@@ -26,6 +27,11 @@ public class MenuManager : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Tab) && gameOverMenu.activeInHierarchy) PlayStop();
     }
 
     // called first
@@ -62,13 +68,20 @@ public class MenuManager : MonoBehaviour
 
     public void Restart()
     {
+        inGameMenu.SetActive(!inGameMenu.activeInHierarchy);
         SceneManager.LoadSceneAsync(1);
     }
 
     public void PlayStop()
     {
         inGameMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
         SceneManager.LoadSceneAsync(0);
+    }
+
+    public void GameOver()
+    {
+        gameOverMenu.SetActive(true);
     }
 
     public void Exit()
