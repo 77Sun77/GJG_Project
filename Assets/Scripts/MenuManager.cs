@@ -88,7 +88,7 @@ public class MenuManager : MonoBehaviour
 
     public void GameOver()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
 
         killCount.text = $"Kill Count : {GameManager.instance.DeathCount}";
         int currentTime = (int)GameManager.instance.timer;
