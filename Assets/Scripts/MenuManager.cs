@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject inGameMenu;
     public GameObject gameOverMenu;
+    public TMP_Text killCount;
+    public TMP_Text time;
     public GameObject clearMenu;
 
     public static MenuManager instance;
@@ -75,6 +79,7 @@ public class MenuManager : MonoBehaviour
 
     public void PlayStop()
     {
+        Time.timeScale = 0;
         inGameMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         SceneManager.LoadSceneAsync(0);
@@ -82,11 +87,22 @@ public class MenuManager : MonoBehaviour
 
     public void GameOver()
     {
+        Time.timeScale = 1;
+
+        killCount.text = $"Kill Count : {GameManager.instance.DeathCount}";
+        int currentTime = (int)GameManager.instance.timer;
+
+        string timeText = "";
+        if (currentTime / 60 == 0) timeText = (currentTime).ToString() + "sec";
+        else timeText = (currentTime / 60) + "min, " + ((currentTime - (currentTime / 60) * 60)).ToString() + "sec";
+        time.text = "TIME : "+ timeText;
+
         gameOverMenu.SetActive(true);
     }
 
     public void Clear()
     {
+        Time.timeScale = 1;
         clearMenu.SetActive(true);
     }
 
