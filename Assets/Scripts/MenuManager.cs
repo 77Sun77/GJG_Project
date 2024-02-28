@@ -6,10 +6,28 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    GameManager gameManager;
-
     public GameObject mainMenu;
     public GameObject inGameMenu;
+
+    public static MenuManager instance;
+
+    private void Awake()
+    {
+        //check if instance is null, if null then create 
+        if (instance == null)
+        {
+            //refers to the GameManager class
+            instance = this;
+            //dont destroy gamemanger game object when loading new scene
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+
+            Destroy(gameObject);
+        }
+    }
+
     // called first
     void OnEnable()
     {
@@ -23,20 +41,10 @@ public class MenuManager : MonoBehaviour
         Debug.Log("OnSceneLoaded: " + scene.name);
         Debug.Log(mode);
 
-        if (gameManager is null && scene.buildIndex == 1)
-        {
-            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        }
-
         if (scene.buildIndex == 0 && !mainMenu.activeInHierarchy)
         {
             mainMenu.SetActive(true);   
         }
-    }
-
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
     }
 
     public void PlayStart()
@@ -52,8 +60,14 @@ public class MenuManager : MonoBehaviour
         else Time.timeScale = 1;
     }
 
+    public void Restart()
+    {
+        SceneManager.LoadSceneAsync(1);
+    }
+
     public void PlayStop()
     {
+        inGameMenu.SetActive(false);
         SceneManager.LoadSceneAsync(0);
     }
 

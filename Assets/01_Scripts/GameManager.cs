@@ -28,19 +28,15 @@ public class GameManager : MonoBehaviour
     public SpawnManager spm;
     public PlayerController PC;
 
-    private MenuManager menuManager;
-
 
     void Start()
     {
         instance = this;
-
-        menuManager = GameObject.Find("MainManager").GetComponent<MenuManager>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) menuManager.Pause();
+        if (Input.GetKeyDown(KeyCode.Escape)) MenuManager.instance.Pause();
 
         timer += Time.deltaTime * timeSpeed;
         
