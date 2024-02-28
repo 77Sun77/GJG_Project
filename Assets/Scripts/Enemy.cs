@@ -190,7 +190,7 @@ public class Enemy : MonoBehaviour
         }
 
         currentHealth -= damage;
-        //healthBar.UpdateValue(currentHealth, health);
+        healthBar.UpdateValue(currentHealth, health);
 
     }
 }
