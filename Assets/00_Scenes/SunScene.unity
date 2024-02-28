@@ -515,6 +515,7 @@ MonoBehaviour:
   FireballCooltime: 0
   RangeAttackCooltime_MAX: 3
   RangeAttackCooltime: 0
+  isMove: 0
   body: {fileID: 1673066795}
 --- !u!114 &138733790
 MonoBehaviour:
@@ -528,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e3731fffec8c6428e7e7d20792d707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4000
+  health: 100
 --- !u!95 &138733791
 Animator:
   serializedVersion: 5

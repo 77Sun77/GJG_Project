@@ -27,16 +27,20 @@ public class GameManager : MonoBehaviour
     [Header("Component")]
     public SpawnManager spm;
     public PlayerController PC;
+
+    private MenuManager menuManager;
     
 
     void Start()
     {
         instance = this;
+
+        menuManager = GameObject.Find("MenuManager").GetComponent<MenuManager>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) Pause();
+        if (Input.GetKeyDown(KeyCode.Escape)) menuManager.Pause();
 
         timer += Time.deltaTime * timeSpeed;
         
@@ -68,13 +72,5 @@ public class GameManager : MonoBehaviour
 
         SkillBlind[1].fillAmount = PC.FireballCooltime / PC.FireballCooltime_MAX;
         SkillBlind[2].fillAmount = PC.RangeAttackCooltime / PC.RangeAttackCooltime_MAX;
-    }
-
-    public void Pause()
-    {
-        menu.SetActive(!menu.activeInHierarchy);
-        if (menu.activeInHierarchy) Time.timeScale = 0;
-        else Time.timeScale = 1;
-
     }
 }
