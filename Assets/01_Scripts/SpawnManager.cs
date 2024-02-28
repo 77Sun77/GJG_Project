@@ -88,7 +88,7 @@ public class SpawnManager : MonoBehaviour
     public void SpawnBoss()
     {
         StopCoroutine(coroutian);
-        StartCoroutine(SpawnBoss_Co());
+        //StartCoroutine(SpawnBoss_Co());
         
     }
 
