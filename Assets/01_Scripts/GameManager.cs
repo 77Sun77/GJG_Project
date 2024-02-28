@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
 
     [Space(20)]
     [Header("UI")]
-    public GameObject GameOver;
-    public GameObject menu;
+    //public GameObject GameOver;
+    //public GameObject menu;
     public TextMeshProUGUI timerText;
     public GameObject[] Skill_Icon;
     public Image[] SkillBlind;
