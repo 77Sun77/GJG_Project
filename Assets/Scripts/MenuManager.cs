@@ -73,13 +73,14 @@ public class MenuManager : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1;
         inGameMenu.SetActive(!inGameMenu.activeInHierarchy);
         SceneManager.LoadSceneAsync(1);
     }
 
     public void PlayStop()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 1;
         inGameMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         SceneManager.LoadSceneAsync(0);
@@ -87,7 +88,7 @@ public class MenuManager : MonoBehaviour
 
     public void GameOver()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 0;
 
         killCount.text = $"Kill Count : {GameManager.instance.DeathCount}";
         int currentTime = (int)GameManager.instance.timer;
@@ -102,7 +103,7 @@ public class MenuManager : MonoBehaviour
 
     public void Clear()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 0;
         clearMenu.SetActive(true);
     }
 
@@ -113,6 +114,7 @@ public class MenuManager : MonoBehaviour
 
     public void ClearAndStop()
     {
+        Time.timeScale = 1;
         inGameMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         clearMenu.SetActive(false);
