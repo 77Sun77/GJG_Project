@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     private float speed;
 
     [SerializeField]
-    private int range;
+    private float range;
     [SerializeField]
     private int damage;
     [SerializeField]
@@ -109,7 +109,7 @@ public class Enemy : MonoBehaviour
         }
 
         //Debug.Log(realAngle);
-        Debug.Log(Quaternion.AngleAxis(realAngle, Vector3.forward).eulerAngles.z);
+        //Debug.Log(Quaternion.AngleAxis(realAngle, Vector3.forward).eulerAngles.z);
 
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, flip.eulerAngles.y, Quaternion.AngleAxis(-realAngle, Vector3.forward).eulerAngles.z);
         //transform.rotation =  Quaternion.AngleAxis(seeingLeft ? realAngle : -realAngle, Vector3.forward) * flip;
