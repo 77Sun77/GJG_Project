@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     private float speed;
 
     [SerializeField]
-    private int range;
+    private float range;
     [SerializeField]
     private int damage;
     [SerializeField]
@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private GameObject bullet;
+    [SerializeField]
+    private float bulletOffset;
 
     private Animator animator;
     private GameObject player;
@@ -52,9 +54,10 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!player) return;
+
         Rotate();
-        if(!Knockback) MoveOrAttack();
-        
+
         if(!Knockback) MoveOrAttack();
         else
         {
@@ -65,7 +68,7 @@ public class Enemy : MonoBehaviour
                 KnockbackTimer = 0;
             }
 
-            rigid.velocity = Vector2.zero;
+            //rigid.velocity = Vector2.zero;
             animator.SetBool("Moving", false);
         }
     }
@@ -92,10 +95,10 @@ public class Enemy : MonoBehaviour
         {
             if (angle < -90)
             {
-                realAngle = Mathf.Clamp(angle, -180, -177);
+                realAngle = -180 - Mathf.Clamp(angle, -180, -177);
             } else if (angle > 90)
             {
-                realAngle = Mathf.Clamp(angle, 177, 180);
+                realAngle = 180 - Mathf.Clamp(angle, 177, 180);
             }
 
             if (!seeingLeft)
@@ -103,12 +106,12 @@ public class Enemy : MonoBehaviour
                 seeingLeft = true;
                 flip = Quaternion.Euler(0, 0, 0);
             }
-
         }
 
         //Debug.Log(realAngle);
+        //Debug.Log(Quaternion.AngleAxis(realAngle, Vector3.forward).eulerAngles.z);
 
-        transform.rotation = flip;
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, flip.eulerAngles.y, Quaternion.AngleAxis(-realAngle, Vector3.forward).eulerAngles.z);
         //transform.rotation =  Quaternion.AngleAxis(seeingLeft ? realAngle : -realAngle, Vector3.forward) * flip;
 
         //Debug.Log(transform.rotation);
@@ -116,12 +119,19 @@ public class Enemy : MonoBehaviour
 
     void MoveOrAttack()
     {
-        if (player)
+        if (player is null) return;
+
+        if (GetPlayerDistance() > range)
         {
+            animator.SetBool("Moving", true);
+
             Move();
         }
         else
-        {
+        {
+            rigid.velocity = Vector2.zero;
+            animator.SetBool("Moving", false);
+
             Attack();
         }
     }
@@ -141,28 +151,30 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        rigid.velocity = Vector2.zero;
         if (Time.time - attackSpeed < lastAttackTime)
         {
             return;
         }
 
         lastAttackTime = Time.time;
-        //animator.SetTrigger("Attack");
+        animator.SetTrigger("Attack");
         if (type == "person" || type == "knight")
         {
             player.GetComponent<Player>().Damage(damage);
         }
         else if (type == "archer")
-        {
-            Instantiate(bullet, transform.position, transform.rotation);
+        {
+            Vector3 vectorToTarget = player.transform.position - transform.position;
+            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
+
+            Instantiate(bullet, transform.position + new Vector3(0, bulletOffset, 0), Quaternion.AngleAxis(angle, Vector3.forward));
         }
         else if(type == "boss")
         {
             float playerDistance = GetPlayerDistance();
             if (playerDistance < 3) player.GetComponent<Player>().Damage(damage);
             else if (playerDistance < 10) Instantiate(bullet, transform.position, transform.rotation);
-            else print("µ¹Áø");
+            else print("ï¿½ï¿½ï¿½ï¿½");
         }
     }
 
@@ -178,7 +190,7 @@ public class Enemy : MonoBehaviour
         }
 
         currentHealth -= damage;
-        //healthBar.UpdateValue(currentHealth, health);
+        healthBar.UpdateValue(currentHealth, health);
 
     }
 }

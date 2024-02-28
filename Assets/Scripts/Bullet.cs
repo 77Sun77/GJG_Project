@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Player")
+        if (collision.CompareTag("Player"))
         {
             Destroy(gameObject);
             collision.GetComponent<Player>().Damage(damage);

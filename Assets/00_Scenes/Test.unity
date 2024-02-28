@@ -316,7 +316,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700812249}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.96, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -758,10 +758,13 @@ MonoBehaviour:
   speed: 1
   range: 5
   damage: 2
-  attackSpeed: 5
+  attackSpeed: 3
   rotateOffset: 0
   bullet: {fileID: 1941385011590777624, guid: 247815fe535a2264e91eacab83c918fd, type: 3}
+  bulletOffset: 0.5
   Knockback: 0
+  KnockbackTimer: 0
+  isDeath: 0
 --- !u!4 &1864516012
 Transform:
   m_ObjectHideFlags: 0
@@ -770,7 +773,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864516010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.29, y: 0.6634511, z: 0}
+  m_LocalPosition: {x: -2.06, y: 0.6634511, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -871,7 +874,10 @@ MonoBehaviour:
   attackSpeed: 1
   rotateOffset: 90
   bullet: {fileID: 6586456435369697616, guid: 177fc5176c0972c459100229ed75b989, type: 3}
+  bulletOffset: 0
   Knockback: 0
+  KnockbackTimer: 0
+  isDeath: 0
 --- !u!95 &1889626924
 Animator:
   serializedVersion: 5
