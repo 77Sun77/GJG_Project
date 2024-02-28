@@ -55,7 +55,7 @@ public class RangeAttack : MonoBehaviour
         enemy.GetComponent<Enemy>().Knockback = true;
         yield return new WaitForSeconds(0.15f);
         enemy.velocity = Vector2.zero;
-        enemy.AddForce(dir.normalized * 10);
+        enemy.AddForce(dir.normalized * 50);
 
         yield return new WaitForSeconds(1f);
         enemy.velocity = Vector2.zero;
