@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 138733791}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1098,9 +1098,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies:
-  - {fileID: 6076626382640695027, guid: 683de3039f5d3284abd14619549ee7bb, type: 3}
-  - {fileID: 3759050341658302184, guid: 9b21d1e783d1b8c4ba77b2a1b61bea8e, type: 3}
-  - {fileID: 8152846133604990738, guid: 5ce4c62beba1795448b8d31a4b06ebda, type: 3}
+  - {fileID: 1073471899475665192, guid: bdc32f2e91021bf4799d15b6e9cb2140, type: 3}
+  - {fileID: 3196612269681676888, guid: 9facd359be81ddb4495957f279b773d3, type: 3}
+  - {fileID: 8001063915321056096, guid: 5d24743a97e043540937125dddb67761, type: 3}
   Boss: {fileID: 1256123979000021899, guid: 5bc753780d030d34296550caf2c78bcf, type: 3}
   EnemyList: []
   SpawnCooltime: 5
