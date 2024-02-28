@@ -18,6 +18,9 @@ public class MenuManager : MonoBehaviour
     public GameObject clearMenu;
     public TMP_Text clearData;
 
+    public GameObject notification;
+    public TMP_Text notificationText;
+
     public static MenuManager instance;
 
     private void Awake()
@@ -141,5 +144,22 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+
+    public void SendNotification(string message, int time)
+    {
+        StartCoroutine(ShowNotification(message, time));
+    }
+
+
+    private IEnumerator ShowNotification(string message, int time)
+    {
+        notificationText.text = message;
+        notification.SetActive(true);
+
+        yield return new WaitForSeconds(time);
+
+        notification.SetActive(false);
     }
 }
