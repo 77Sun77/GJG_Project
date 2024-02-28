@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject inGameMenu;
     public GameObject gameOverMenu;
+    public GameObject clearMenu;
 
     public static MenuManager instance;
 
@@ -82,6 +83,24 @@ public class MenuManager : MonoBehaviour
     public void GameOver()
     {
         gameOverMenu.SetActive(true);
+    }
+
+    public void Clear()
+    {
+        clearMenu.SetActive(true);
+    }
+
+    public void ClearAndContinue()
+    {
+        // TODO : 무한모드 진입
+    }
+
+    public void ClearAndStop()
+    {
+        inGameMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
+        clearMenu.SetActive(false);
+        SceneManager.LoadSceneAsync(0);
     }
 
     public void Exit()
