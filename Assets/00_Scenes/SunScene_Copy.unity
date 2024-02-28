@@ -1338,7 +1338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e3731fffec8c6428e7e7d20792d707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
+  health: 2.2222221e+10
   healthBar: {fileID: 2007122414}
   pc: {fileID: 138733789}
 --- !u!95 &138733791
@@ -7214,7 +7214,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020891367}
-  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38543764, w: 0.9227339}
   m_LocalPosition: {x: -1, y: 1, z: 0}
   m_LocalScale: {x: 0.28, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0

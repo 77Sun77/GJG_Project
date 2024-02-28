@@ -145,4 +145,10 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void SizeUp()
+    {
+        body[0].gameObject.SetActive(false);
+        body[1].gameObject.SetActive(true);
+    }
 }

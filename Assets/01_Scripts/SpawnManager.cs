@@ -89,7 +89,7 @@ public class SpawnManager : MonoBehaviour
     {
         StopCoroutine(coroutian);
         StartCoroutine(SpawnBoss_Co());
-        
+        GameManager.instance.PC.SizeUp();
     }
 
     IEnumerator SpawnBoss_Co()

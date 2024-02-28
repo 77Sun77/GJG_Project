@@ -72,5 +72,14 @@ public class GameManager : MonoBehaviour
         SkillBlind[0].fillAmount = PC.MeleeAttackCooltime / PC.MeleeAttack_MAX;
         SkillBlind[1].fillAmount = PC.FireballCooltime / PC.FireballCooltime_MAX;
         SkillBlind[2].fillAmount = PC.RangeAttackCooltime / PC.RangeAttackCooltime_MAX;
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            timeSpeed = 20;
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            timeSpeed = 1;
+        }
     }
 }
