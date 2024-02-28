@@ -54,6 +54,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!player) return;
+
         Rotate();
 
         if(!Knockback) MoveOrAttack();
@@ -126,7 +128,7 @@ public class Enemy : MonoBehaviour
             Move();
         }
         else
-        {
+        {
             rigid.velocity = Vector2.zero;
             animator.SetBool("Moving", false);
 
@@ -161,8 +163,8 @@ public class Enemy : MonoBehaviour
             player.GetComponent<Player>().Damage(damage);
         }
         else if (type == "archer")
-        {
-            Vector3 vectorToTarget = player.transform.position - transform.position;
+        {
+            Vector3 vectorToTarget = player.transform.position - transform.position;
             float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
 
             Instantiate(bullet, transform.position + new Vector3(0, bulletOffset, 0), Quaternion.AngleAxis(angle, Vector3.forward));
@@ -172,7 +174,7 @@ public class Enemy : MonoBehaviour
             float playerDistance = GetPlayerDistance();
             if (playerDistance < 3) player.GetComponent<Player>().Damage(damage);
             else if (playerDistance < 10) Instantiate(bullet, transform.position, transform.rotation);
-            else print("µ¹Áø");
+            else print("ï¿½ï¿½ï¿½ï¿½");
         }
     }
 
