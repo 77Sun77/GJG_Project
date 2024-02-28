@@ -10,10 +10,13 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject inGameMenu;
+
     public GameObject gameOverMenu;
-    public TMP_Text killCount;
-    public TMP_Text time;
+    public TMP_Text gameOverKillCount;
+    public TMP_Text gameOverTime;
+
     public GameObject clearMenu;
+    public TMP_Text clearData;
 
     public static MenuManager instance;
 
@@ -88,21 +91,28 @@ public class MenuManager : MonoBehaviour
 
     public void GameOver()
     {
-        //Time.timeScale = 0;
-
-        killCount.text = $"Kill Count : {GameManager.instance.DeathCount}";
+        gameOverKillCount.text = $"Kill Count : {GameManager.instance.DeathCount}";
         int currentTime = (int)GameManager.instance.timer;
 
         string timeText = "";
         if (currentTime / 60 == 0) timeText = (currentTime).ToString() + "sec";
         else timeText = (currentTime / 60) + "min, " + ((currentTime - (currentTime / 60) * 60)).ToString() + "sec";
-        time.text = "TIME : "+ timeText;
+        gameOverTime.text = "TIME : "+ timeText;
 
         gameOverMenu.SetActive(true);
     }
 
     public void Clear()
     {
+        int currentTime = (int)GameManager.instance.timer;
+
+        string killCount = $"처치한 적 : {GameManager.instance.DeathCount}\n";
+
+        string timeText = "";
+        if (currentTime / 60 == 0) timeText = (currentTime).ToString() + "sec";
+        else timeText = (currentTime / 60) + "min, " + ((currentTime - (currentTime / 60) * 60)).ToString() + "sec";
+        clearData.text = killCount + "걸린 시간 : " + timeText;
+
         Time.timeScale = 0;
         clearMenu.SetActive(true);
     }
