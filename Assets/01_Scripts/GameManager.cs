@@ -29,13 +29,13 @@ public class GameManager : MonoBehaviour
     public PlayerController PC;
 
     private MenuManager menuManager;
-    
+
 
     void Start()
     {
         instance = this;
 
-        menuManager = GameObject.Find("MenuManager").GetComponent<MenuManager>();
+        menuManager = GameObject.Find("MainManager").GetComponent<MenuManager>();
     }
 
     void Update()
